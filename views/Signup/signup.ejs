@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Signup | Contact Me Services</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg-main: #0b0f17;
+        --bg-surface: #131a26;
+        --text-pure: #ffffff;
+        --text-muted: #94a3b8;
+        --accent: #c29b68;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-focus: rgba(194, 155, 104, 0.5);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-pure);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .auth-background {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(11, 15, 23, 0.9), rgba(11, 15, 23, 0.98)),
+          url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070")
+            center/cover no-repeat;
+        z-index: -2;
+      }
+
+      .glow-orb {
+        position: absolute;
+        width: 50vw;
+        height: 50vw;
+        max-width: 500px;
+        max-height: 500px;
+        background: radial-gradient(circle, rgba(194, 155, 104, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .signup-container {
+        width: 100%;
+        max-width: 560px;
+        padding: 1.5rem;
+        z-index: 10;
+      }
+
+      .signup-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-top: 3px solid var(--accent);
+        padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .brand-logo {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+        color: var(--text-pure);
+        text-decoration: none;
+        font-weight: 700;
+        display: block;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .brand-logo span {
+        color: var(--accent);
+      }
+
+      .signup-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .signup-header p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+      }
+
+      .error-banner {
+        margin-bottom: 1.25rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(194, 155, 104, 0.35);
+        background: rgba(194, 155, 104, 0.08);
+        color: #f8ead3;
+        font-size: 0.9rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.25rem;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+        color: var(--text-muted);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 1.05rem 1rem 1.05rem 3rem;
+        border: 1px solid var(--border-color);
+        background: rgba(11, 15, 23, 0.5);
+        color: var(--text-pure);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--border-focus);
+        background: var(--bg-main);
+      }
+
+      .input-icon {
+        position: absolute;
+        bottom: 1.05rem;
+        left: 1.1rem;
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      .btn-premium,
+      .google-btn {
+        width: 100%;
+        border: none;
+        padding: 1rem 1.1rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn-premium {
+        background: var(--accent);
+        color: var(--bg-main);
+        margin-top: 0.25rem;
+      }
+
+      .google-btn {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-pure);
+        margin-top: 0.9rem;
+      }
+
+      .btn-premium:hover,
+      .google-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .auth-switch {
+        margin-top: 1.4rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .auth-switch a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .return-home {
+        display: block;
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        text-decoration: none;
+      }
+
+      @media (max-width: 480px) {
+        .signup-container {
+          padding: 0;
+        }
+
+        .signup-card {
+          border-left: none;
+          border-right: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-background"></div>
+    <div class="glow-orb"></div>
+
+    <main class="signup-container">
+      <div class="signup-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="signup-header">
+          <a href="/" class="brand-logo">Contact Me <span>Services</span></a>
+          <p>Create your account</p>
+        </div>
+
+        <% if (error) { %>
+        <div class="error-banner"><%= error %></div>
+        <% } %>
+
+        <form action="/api/v1/signup" method="POST">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Your name"
+              value="<%= typeof name !== 'undefined' ? name : '' %>"
+              required
+            />
+            <i class="fa-regular fa-user input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Corporate Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="name@company.com"
+              value="<%= typeof email !== 'undefined' ? email : '' %>"
+              required
+            />
+            <i class="fa-regular fa-envelope input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-lock input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-shield-halved input-icon"></i>
+          </div>
+
+          <button type="submit" class="btn-premium">
+            Create Account <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <a href="/api/v1/auth/google" class="google-btn">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </a>
+
+        <div class="auth-switch">
+          Already have an account? <a href="/api/v1/login">Login here</a>
+        </div>
+
+        <a href="/" class="return-home">
+          <i class="fa-solid fa-arrow-left"></i> Return to Homepage
+        </a>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ once: true, easing: "cubic-bezier(0.25, 1, 0.5, 1)" });
+    </script>
+  </body>
+</html>

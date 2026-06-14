@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Signup | Contact Me Services</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Auth_CSS/auth.css" />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
+  </head>
+  <body class="auth-page auth-page--signup">
+    <div class="auth-background"></div>
+    <div class="glow-orb"></div>
+    <div class="auth-page-toolbar">
+      <a class="auth-toolbar-home" href="/">Home</a>
+      <%- include('../partials/authActions') %>
+    </div>
+
+    <main class="auth-shell">
+      <div class="auth-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="auth-header">
+          <a href="/" class="brand-logo">Contact Me <span>Services</span></a>
+          <p>Create your account</p>
+        </div>
+
+        <% if (error) { %>
+        <div class="auth-error"><%= error %></div>
+        <% } %>
+
+        <form action="<%= signupAction || '/api/v1/signup' %>" method="POST">
+          <% if (returnTo) { %>
+          <input type="hidden" name="returnTo" value="<%= returnTo %>" />
+          <% } %>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Your name"
+              value="<%= typeof name !== 'undefined' ? name : '' %>"
+              required
+            />
+            <i class="fa-regular fa-user input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Corporate Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="name@company.com"
+              value="<%= typeof email !== 'undefined' ? email : '' %>"
+              required
+            />
+            <i class="fa-regular fa-envelope input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-lock input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-shield-halved input-icon"></i>
+          </div>
+
+          <button type="submit" class="btn-premium">
+            Create Account <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <a href="<%= googleHref || '/api/v1/auth/google' %>" class="google-btn">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </a>
+
+        <div class="auth-switch">
+          Already have an account?
+          <a href="<%= loginHref || '/api/v1/login' %>">Login here</a>
+        </div>
+
+        <a href="/" class="return-home">
+          <i class="fa-solid fa-arrow-left"></i> Return to Homepage
+        </a>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/Auth_JS/auth.js"></script>
+  </body>
+</html>

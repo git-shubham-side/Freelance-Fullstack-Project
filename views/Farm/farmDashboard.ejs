@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -724,18 +725,30 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#team">Our Team</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li class="mobile-login" style="display: none">
-              <a href="/api/v1/login" style="color: var(--accent)"
-                >Login Portal</a
-              >
+            <% if (authUser) { %>
+            <li class="mobile-login auth-mobile-item" style="display: none">
+              <a href="/api/v1/profile" style="color: var(--accent)">
+                Profile
+              </a>
             </li>
+            <% } else { %>
+            <li class="mobile-login auth-mobile-item" style="display: none">
+              <a href="/api/v1/login?returnTo=%2Fapi%2Fv1%2Fb1" style="color: var(--accent)">
+                Login Portal
+              </a>
+            </li>
+            <% } %>
           </ul>
         </nav>
 
         <div class="header-actions">
+          <% if (authUser) { %>
+          <%- include('../partials/authActions') %>
+          <% } else { %>
           <button class="btn-premium btn-header-login" id="apiLoginBtn">
             <i class="fa-solid fa-right-to-bracket"></i> Login
           </button>
+          <% } %>
           <button class="mobile-menu-btn" id="mobileMenuToggle">
             <i class="fa-solid fa-bars"></i>
           </button>
@@ -1137,13 +1150,19 @@
 
       // Handle mobile login link visibility
       if (window.innerWidth <= 480) {
-        document.querySelector(".mobile-login").style.display = "block";
+        const mobileLoginLink = document.querySelector(".mobile-login");
+        if (mobileLoginLink) {
+          mobileLoginLink.style.display = "block";
+        }
       }
 
-      document.getElementById("apiLoginBtn").addEventListener("click", (e) => {
-        e.preventDefault();
-        window.location.href = "/api/v1/login";
-      });
+      const apiLoginBtn = document.getElementById("apiLoginBtn");
+      if (apiLoginBtn) {
+        apiLoginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.location.href = "/api/v1/login?returnTo=%2Fapi%2Fv1%2Fb1";
+        });
+      }
 
       if (window.innerWidth > 992) {
         const cursor = document.getElementById("custom-cursor");

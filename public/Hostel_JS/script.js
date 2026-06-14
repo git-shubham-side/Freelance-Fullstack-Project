@@ -215,52 +215,69 @@ const addReviewBtn = $("#addReviewBtn");
 const reviewModal = $("#reviewModal");
 const modalClose = $("#modalClose");
 
-addReviewBtn.addEventListener("click", () => {
-  reviewModal.classList.add("active");
-  document.body.style.overflow = "hidden";
-});
+if (addReviewBtn && reviewModal) {
+  addReviewBtn.addEventListener("click", () => {
+    reviewModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
+}
 
 function closeModal() {
+  if (!reviewModal) return;
   reviewModal.classList.remove("active");
   document.body.style.overflow = "";
 }
 
-modalClose.addEventListener("click", closeModal);
+if (modalClose) {
+  modalClose.addEventListener("click", closeModal);
+}
 
-reviewModal.addEventListener("click", (e) => {
-  if (e.target === reviewModal) closeModal();
-});
+if (reviewModal) {
+  reviewModal.addEventListener("click", (e) => {
+    if (e.target === reviewModal) closeModal();
+  });
+}
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && reviewModal.classList.contains("active"))
+  if (
+    reviewModal &&
+    e.key === "Escape" &&
+    reviewModal.classList.contains("active")
+  )
     closeModal();
 });
 
 /* ── 7. STAR PICKER (Review Modal) ──────────────────────────── */
 const starPicker = $("#starPicker");
-const starIcons = $$("i", starPicker);
+const reviewRatingInput = $("#reviewRating");
+const reviewForm = $("#reviewForm");
+const starIcons = starPicker ? $$("i", starPicker) : [];
 
-starIcons.forEach((star, i) => {
-  star.addEventListener("mouseenter", () => {
-    starIcons.forEach((s, j) => {
-      s.className = j <= i ? "fa-solid fa-star" : "fa-regular fa-star";
+if (starPicker && reviewRatingInput) {
+  starIcons.forEach((star, i) => {
+    star.addEventListener("mouseenter", () => {
+      starIcons.forEach((s, j) => {
+        s.className = j <= i ? "fa-solid fa-star" : "fa-regular fa-star";
+      });
+    });
+
+    star.addEventListener("click", () => {
+      starIcons.forEach((s, j) => {
+        s.className = j <= i ? "fa-solid fa-star filled" : "fa-regular fa-star";
+      });
+      starPicker.dataset.rating = i + 1;
+      reviewRatingInput.value = i + 1;
     });
   });
 
-  star.addEventListener("click", () => {
+  starPicker.addEventListener("mouseleave", () => {
+    const rating = parseInt(starPicker.dataset.rating) || 0;
     starIcons.forEach((s, j) => {
-      s.className = j <= i ? "fa-solid fa-star filled" : "fa-regular fa-star";
+      s.className =
+        j < rating ? "fa-solid fa-star filled" : "fa-regular fa-star";
     });
-    starPicker.dataset.rating = i + 1;
   });
-});
-
-starPicker.addEventListener("mouseleave", () => {
-  const rating = parseInt(starPicker.dataset.rating) || 0;
-  starIcons.forEach((s, j) => {
-    s.className = j < rating ? "fa-solid fa-star filled" : "fa-regular fa-star";
-  });
-});
+}
 
 /* ── 8. SCROLL TO TOP ───────────────────────────────────────── */
 const scrollTopBtn = $("#scrollTop");
@@ -389,35 +406,14 @@ featureCards.forEach((card, i) => {
   card.style.transitionDelay = `${(i % 4) * 0.1}s`;
 });
 
-/* ── 16. SUBMIT REVIEW BUTTON (UI demo) ─────────────────────── */
-const submitBtn = $(".modal-form .btn-primary");
-if (submitBtn) {
-  submitBtn.addEventListener("click", () => {
-    const nameInput = $(".modal-input");
-    const textarea = $(".modal-textarea");
-    if (!nameInput.value.trim()) {
-      nameInput.style.borderColor = "#ff7070";
-      nameInput.focus();
-      setTimeout(() => (nameInput.style.borderColor = ""), 2000);
-      return;
+/* ── 16. REVIEW FORM SUBMIT STATE ──────────────────────────── */
+if (reviewForm) {
+  const submitBtn = reviewForm.querySelector(".btn-primary");
+  reviewForm.addEventListener("submit", () => {
+    if (submitBtn) {
+      submitBtn.textContent = "Submitting...";
+      submitBtn.disabled = true;
     }
-
-    // Success state
-    submitBtn.textContent = "✓ Thank you for your review!";
-    submitBtn.style.background = "linear-gradient(135deg, #4caf7a, #2d8a56)";
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-      closeModal();
-      // Reset
-      submitBtn.textContent = "Submit Review";
-      submitBtn.style.background = "";
-      submitBtn.disabled = false;
-      nameInput.value = "";
-      textarea.value = "";
-      starIcons.forEach((s) => (s.className = "fa-regular fa-star"));
-      delete starPicker.dataset.rating;
-    }, 2000);
   });
 }
 

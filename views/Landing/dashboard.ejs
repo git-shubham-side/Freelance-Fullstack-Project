@@ -18,6 +18,7 @@
     />
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
 
     <style>
       /* --- PREMIUM ENTERPRISE CODAVER VARIABLES --- */
@@ -567,14 +568,25 @@
         ></i>
         CMS
       </a>
-      <button
-        onclick="contactNow()"
-        class="btn-premium btn-outline"
-        style="padding: 0.6rem 1.5rem"
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        "
       >
-        <i class="fa-solid fa-phone"></i>
-        <span class="hide-mobile">Support</span>
-      </button>
+        <button
+          onclick="contactNow()"
+          class="btn-premium btn-outline"
+          style="padding: 0.6rem 1.5rem"
+        >
+          <i class="fa-solid fa-phone"></i>
+          <span class="hide-mobile">Support</span>
+        </button>
+        <%- include('../partials/authActions') %>
+      </div>
     </header>
 
     <main>

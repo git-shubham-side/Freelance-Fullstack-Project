@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | Contact Me Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
+    <style>
+      :root { --bg-main:#0b0f17; --bg-surface:#131a26; --text-pure:#fff; --text-muted:#94a3b8; --accent:#c29b68; --border-color:rgba(255,255,255,.08); }
+      * { box-sizing:border-box; margin:0; padding:0; font-family:"Plus Jakarta Sans",sans-serif; }
+      body { min-height:100vh; background:radial-gradient(circle at top, rgba(194,155,104,.12), transparent 35%), var(--bg-main); color:var(--text-pure); }
+      .profile-shell { max-width:980px; margin:0 auto; padding:2rem 1rem 4rem; }
+      .profile-top { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+      .profile-title { font-family:"Playfair Display",serif; font-size:clamp(2rem,4vw,3rem); }
+      .profile-card { background:var(--bg-surface); border:1px solid var(--border-color); border-top:3px solid var(--accent); padding:1.5rem; box-shadow:0 30px 60px rgba(0,0,0,.45); }
+      .profile-grid { display:grid; grid-template-columns:1.2fr .8fr; gap:1.5rem; }
+      .profile-panel, .profile-side { background:rgba(255,255,255,.02); border:1px solid var(--border-color); padding:1.25rem; }
+      .profile-avatar { width:74px; height:74px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--accent),#9a7430); color:#0b0f17; font-weight:800; font-size:1.3rem; margin-bottom:1rem; }
+      .profile-meta { color:var(--text-muted); font-size:.92rem; margin-bottom:1rem; }
+      .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+      .form-group { display:flex; flex-direction:column; gap:.45rem; margin-bottom:1rem; }
+      label { color:var(--text-muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; }
+      input { width:100%; background:#0b0f17; border:1px solid var(--border-color); color:var(--text-pure); padding: .95rem 1rem; }
+      .profile-actions { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem; }
+      .btn { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; border:none; padding:.9rem 1.1rem; font-weight:700; cursor:pointer; text-decoration:none; }
+      .btn-primary { background:var(--accent); color:#0b0f17; }
+      .btn-ghost { background:transparent; border:1px solid var(--border-color); color:var(--text-pure); }
+      .notice { padding:.9rem 1rem; margin-bottom:1rem; border:1px solid rgba(194,155,104,.25); background:rgba(194,155,104,.08); color:#f7ead3; }
+      .error { border-color:rgba(255,112,112,.25); background:rgba(255,112,112,.08); color:#ffd0d0; }
+      .side-list { display:flex; flex-direction:column; gap:.75rem; }
+      .side-item { padding:.9rem 1rem; border:1px solid var(--border-color); background:rgba(255,255,255,.02); }
+      .side-item span { display:block; color:var(--text-muted); font-size:.78rem; text-transform:uppercase; margin-bottom:.25rem; }
+      .side-item strong { font-size:.98rem; }
+      @media (max-width:768px) { .profile-grid, .form-grid { grid-template-columns:1fr; } .profile-top { flex-direction:column; align-items:flex-start; } }
+    </style>
+  </head>
+  <body>
+    <div class="profile-shell">
+      <div class="profile-top">
+        <div>
+          <a href="/" class="brand-logo" style="color:#fff;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:.5rem;">
+            <i class="fa-solid fa-cube" style="color:var(--accent)"></i> Contact Me Services
+          </a>
+          <div class="profile-title">Your Profile</div>
+        </div>
+        <%- include('../partials/authActions') %>
+      </div>
+
+      <% if (success) { %><div class="notice"><%= success %></div><% } %>
+      <% if (error) { %><div class="notice error"><%= error %></div><% } %>
+
+      <div class="profile-card">
+        <div class="profile-grid">
+          <div class="profile-panel">
+            <div class="profile-avatar"><%= authUser.name ? authUser.name.split(' ').map((part) => part[0]).join('').slice(0,2).toUpperCase() : 'U' %></div>
+            <div class="profile-meta">Logged in as <strong><%= authUser.email %></strong></div>
+            <form action="/api/v1/profile" method="POST">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input id="name" name="name" type="text" value="<%= authUser.name || '' %>" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" value="<%= authUser.email || '' %>" required />
+                </div>
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <input id="currentPassword" name="currentPassword" type="password" placeholder="Required for password change" />
+                </div>
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input id="newPassword" name="newPassword" type="password" placeholder="Leave blank to keep current" />
+                </div>
+              </div>
+              <div class="profile-actions">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                <a class="btn btn-ghost" href="/api/v1/b2"><i class="fa-solid fa-arrow-left"></i> Back to Hostel</a>
+              </div>
+            </form>
+          </div>
+
+          <div class="profile-side">
+            <div class="side-list">
+              <div class="side-item"><span>Provider</span><strong><%= authUser.authProvider || 'local' %></strong></div>
+              <div class="side-item"><span>User ID</span><strong><%= authUser._id %></strong></div>
+              <div class="side-item"><span>Quick Access</span><strong>Reviews, bookings, and account updates</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

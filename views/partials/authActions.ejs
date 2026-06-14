@@ -1,0 +1,27 @@
+<%
+  const resolvedAuthUser = typeof authUser !== 'undefined' && authUser ? authUser : null;
+  const authReturnTo = typeof currentPath !== 'undefined' && currentPath ? currentPath : '/';
+  const loginHref = `/api/v1/login?returnTo=${encodeURIComponent(authReturnTo)}`;
+  const signupHref = `/api/v1/signup?returnTo=${encodeURIComponent(authReturnTo)}`;
+%>
+<div class="site-auth-actions">
+  <% if (resolvedAuthUser) { %>
+    <a class="site-auth-pill site-auth-profile" href="/api/v1/profile">
+      <i class="fa-regular fa-user"></i>
+      <span><%= resolvedAuthUser.name ? resolvedAuthUser.name.split(' ')[0] : 'Profile' %></span>
+    </a>
+    <a class="site-auth-pill site-auth-logout" href="/api/v1/logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Logout</span>
+    </a>
+  <% } else { %>
+    <a class="site-auth-pill site-auth-login" href="<%= loginHref %>">
+      <i class="fa-solid fa-right-to-bracket"></i>
+      <span>Login</span>
+    </a>
+    <a class="site-auth-pill site-auth-signup" href="<%= signupHref %>">
+      <i class="fa-solid fa-user-plus"></i>
+      <span>Sign Up</span>
+    </a>
+  <% } %>
+</div>

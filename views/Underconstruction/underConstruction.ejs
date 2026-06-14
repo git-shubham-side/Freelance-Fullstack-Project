@@ -18,6 +18,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
 
     <style>
       /* --- TECHNICAL THEME VARIABLES --- */
@@ -457,13 +458,24 @@
         <i class="fa-solid fa-layer-group" style="color: var(--accent)"></i>
         CMS <span>Portal</span>
       </a>
-      <a
-        href="mailto:support@contactmeservices.com"
-        class="btn-ghost header-btn"
-        style="padding: 0.5rem 1rem; font-size: 0.8rem"
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        "
       >
-        Contact Support
-      </a>
+        <a
+          href="mailto:support@contactmeservices.com"
+          class="btn-ghost header-btn"
+          style="padding: 0.5rem 1rem; font-size: 0.8rem"
+        >
+          Contact Support
+        </a>
+        <%- include('../partials/authActions') %>
+      </div>
     </header>
 
     <!-- Main Content -->

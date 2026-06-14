@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Login | Contact Me Services</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Auth_CSS/auth.css" />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
+  </head>
+  <body class="auth-page auth-page--login">
+    <div class="auth-background"></div>
+    <div class="glow-orb"></div>
+    <div id="custom-cursor"></div>
+    <div class="auth-page-toolbar">
+      <a class="auth-toolbar-home" href="/">Home</a>
+      <%- include('../partials/authActions') %>
+    </div>
+
+    <main class="auth-shell">
+      <div class="auth-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="auth-header">
+          <a href="/" class="brand-logo">Contact Me <span>Services</span></a>
+          <p>Login</p>
+        </div>
+
+        <% if (error) { %>
+        <div class="auth-error"><%= error %></div>
+        <% } %>
+
+        <form action="<%= loginAction || '/api/v1/login' %>" method="POST">
+          <% if (returnTo) { %>
+          <input type="hidden" name="returnTo" value="<%= returnTo %>" />
+          <% } %>
+          <div class="form-group">
+            <label for="email">Corporate Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="name@company.com"
+              value="<%= typeof email !== 'undefined' ? email : '' %>"
+              required
+            />
+            <i class="fa-regular fa-envelope input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-lock input-icon"></i>
+            <i class="fa-regular fa-eye password-toggle" id="togglePassword"></i>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" name="remember" />
+              <span>Remember this device</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-premium">
+            Access Dashboard <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </button>
+        </form>
+
+        <a href="<%= googleHref || '/api/v1/auth/google' %>" class="google-btn">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </a>
+
+        <div class="auth-link-row">
+          New here?
+          <a href="<%= signupHref || '/api/v1/signup' %>">Create an account</a>
+        </div>
+
+        <a href="/" class="return-home">
+          <i class="fa-solid fa-arrow-left"></i> Return to Homepage
+        </a>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/Auth_JS/auth.js"></script>
+  </body>
+</html>

@@ -15,7 +15,7 @@
     <title>Deendayal Boys Hostel</title>
 
     <!-- Favicon placeholder -->
-    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="icon" type="image/png" href="/Hostel_Images/logo.JPG" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,8 +33,13 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/Hostel_CSS/hostel.css" />
+    <link rel="stylesheet" href="/Auth_CSS/auth-nav.css" />
   </head>
   <body>
+    <% var reviewStats = reviewStats || { count: 0, average: 0 }; %>
+    <% var authUser = authUser || null; %>
+    <% var recentReviews = recentReviews || []; %>
+
     <!-- ========== PRELOADER ========== -->
     <div id="preloader">
       <div class="preloader-inner">
@@ -68,9 +73,12 @@
           <li><a href="#features" class="nav-link">Features</a></li>
           <li><a href="#gallery" class="nav-link">Gallery</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#location" class="nav-link">Location</a></li>
           <li><a href="#reviews" class="nav-link">Reviews</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
+
+        <%- include('../partials/authActions') %>
 
         <!-- Hamburger -->
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -108,7 +116,7 @@
       <div
         class="hero-bg mobile-bg"
         id="heroBgMobile"
-        data-slides="/Hostel_Images/img 2.jpeg"
+        data-slides="/Hostel_Images/IMG 2.jpeg"
       ></div>
 
       <div class="hero-overlay"></div>
@@ -303,7 +311,7 @@
             class="gallery-item reveal-up delay-1"
             data-caption="Modern Common Area"
           >
-            <img src="images/3.jpeg" alt="Common Area" loading="lazy" />
+            <img src="/Hostel_Images/3.jpeg" alt="Common Area" loading="lazy" />
             <div class="gallery-overlay">
               <i class="fa-solid fa-magnifying-glass-plus"></i>
               <span>Common Area</span>
@@ -449,6 +457,74 @@
       </div>
     </section>
 
+    <!-- ========== LOCATION MAP SECTION ========== -->
+    <section id="location" class="location section-pad">
+      <div class="container location-grid">
+        <div class="location-content reveal-left">
+          <span class="section-tag">Find Us Easily</span>
+          <h2 class="section-title">Hostel <em>Location Map</em></h2>
+          <p class="section-desc">
+            Use the live map below to find Deendayal Boys Hostel without
+            guesswork. The hostel is situated at Mahalakshmi Complex, Bhagya
+            Nagar T-Point, Nanded, Maharashtra.
+          </p>
+
+          <div class="location-card">
+            <div class="location-card-row">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <strong>Mahalakshmi Complex</strong>
+                <span>Bhagya Nagar T-Point, Nanded, Maharashtra – 431606</span>
+              </div>
+            </div>
+
+            <div class="location-card-row">
+              <i class="fa-solid fa-route"></i>
+              <div>
+                <strong>Easy Directions</strong>
+                <span
+                  >Search this address on Google Maps or follow the embedded
+                  map.</span
+                >
+              </div>
+            </div>
+
+            <div class="location-pills">
+              <span>Near Colleges</span>
+              <span>Near Markets</span>
+              <span>Easy Transport Access</span>
+            </div>
+
+            <div class="location-actions">
+              <a
+                class="btn btn-primary"
+                href="https://www.google.com/maps/search/?api=1&query=Mahalakshmi+Complex%2C+Bhagya+Nagar+T-Point%2C+Nanded%2C+Maharashtra+431606"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="fa-solid fa-map-location-dot"></i> Open in Google Maps
+              </a>
+              <a href="tel:+919405365015" class="btn btn-outline">
+                <i class="fa-solid fa-phone"></i> Ask for Directions
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-map reveal-right">
+          <div class="map-frame">
+            <iframe
+              title="Deendayal Boys Hostel Location Map"
+              src="https://www.google.com/maps?q=Mahalakshmi+Complex,+Bhagya+Nagar+T-Point,+Nanded,+Maharashtra+431606&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ========== REVIEWS SECTION ========== -->
     <section id="reviews" class="reviews section-pad">
       <div class="container">
@@ -458,6 +534,21 @@
           <p class="section-desc">
             Real experiences from the students who call Deendayal their home.
           </p>
+        </div>
+
+        <div class="reviews-overview reveal-up">
+          <div class="review-metric">
+            <strong><%= reviewStats.count %></strong>
+            <span>Published Reviews</span>
+          </div>
+          <div class="review-metric">
+            <strong><%= reviewStats.average ? reviewStats.average.toFixed(1) : '0.0' %>★</strong>
+            <span>Average Rating</span>
+          </div>
+          <div class="review-metric">
+            <strong><%= authUser ? authUser.name.split(' ')[0] : 'Guest' %></strong>
+            <span><%= authUser ? 'Signed in' : 'Login to review' %></span>
+          </div>
         </div>
 
         <div class="reviews-grid">
@@ -522,51 +613,109 @@
           </div>
         </div>
 
-        <!-- Add Review Button (UI only) -->
-        <div class="reviews-action reveal-up">
-          <button class="btn btn-outline" id="addReviewBtn">
-            <i class="fa-solid fa-pen-to-square"></i> Add Your Review
-          </button>
+        <div class="reviews-feed-header reveal-up">
+          <span class="section-tag">Recent Reviews</span>
+          <h3>Latest Student Feedback</h3>
         </div>
 
-        <!-- Review Modal (UI only) -->
-        <div
-          id="reviewModal"
-          class="modal"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Add Review"
-        >
-          <div class="modal-box">
-            <button class="modal-close" id="modalClose" aria-label="Close">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h3>Share Your Experience</h3>
-            <p>Your review helps future students make an informed decision.</p>
-            <div class="modal-form">
-              <input type="text" placeholder="Your Name" class="modal-input" />
-              <input
-                type="text"
-                placeholder="Course & Year"
-                class="modal-input"
-              />
-              <div class="star-picker" id="starPicker">
-                <span>Rating:</span>
-                <i class="fa-regular fa-star" data-val="1"></i>
-                <i class="fa-regular fa-star" data-val="2"></i>
-                <i class="fa-regular fa-star" data-val="3"></i>
-                <i class="fa-regular fa-star" data-val="4"></i>
-                <i class="fa-regular fa-star" data-val="5"></i>
+        <div class="reviews-grid recent-reviews-grid">
+          <% if (recentReviews && recentReviews.length) { %>
+            <% recentReviews.forEach((review) => { %>
+              <div class="review-card reveal-up">
+                <div class="review-stars">
+                  <% for (let i = 0; i < review.stars.filled.length; i += 1) { %>
+                    <i class="fa-solid fa-star"></i>
+                  <% } %>
+                  <% for (let i = 0; i < review.stars.empty.length; i += 1) { %>
+                    <i class="fa-regular fa-star"></i>
+                  <% } %>
+                </div>
+                <p class="review-text"><%= review.message %></p>
+                <div class="review-author review-author--stacked">
+                  <div class="review-avatar" data-initials="<%= review.initials %>"></div>
+                  <div>
+                    <strong><%= review.name %></strong>
+                    <span><%= review.course %></span>
+                  </div>
+                </div>
+                <div class="review-meta">
+                  <i class="fa-regular fa-calendar"></i> <%= review.formattedDate %>
+                </div>
               </div>
-              <textarea
-                placeholder="Write your review..."
-                class="modal-textarea"
-                rows="4"
-              ></textarea>
-              <button class="btn btn-primary full-width">Submit Review</button>
+            <% }) %>
+          <% } else { %>
+            <div class="review-empty-card reveal-up">
+              <i class="fa-regular fa-comment-dots"></i>
+              <h3>No recent reviews yet</h3>
+              <p>Be the first logged-in student to share how the hostel is doing.</p>
+            </div>
+          <% } %>
+        </div>
+
+        <div class="reviews-action reveal-up">
+          <% if (authUser) { %>
+            <button class="btn btn-outline" id="addReviewBtn">
+              <i class="fa-solid fa-pen-to-square"></i> Add Your Review
+            </button>
+          <% } else { %>
+            <a
+              class="btn btn-outline"
+              href="/api/v1/login?returnTo=<%= encodeURIComponent('/api/v1/b2#reviews') %>"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i> Login to Add Review
+            </a>
+          <% } %>
+        </div>
+
+        <% if (authUser) { %>
+          <div
+            id="reviewModal"
+            class="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Add Review"
+          >
+            <div class="modal-box modal-box--review">
+              <button class="modal-close" id="modalClose" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <h3>Share Your Experience</h3>
+              <p>Your review helps future students make an informed decision.</p>
+              <form class="modal-form" id="reviewForm" action="/api/v1/b2/reviews" method="POST">
+                <div class="review-login-chip">
+                  Logged in as <strong><%= authUser.name %></strong>
+                </div>
+                <input type="text" value="<%= authUser.name %>" class="modal-input" disabled />
+                <input
+                  type="text"
+                  name="course"
+                  placeholder="Course & Year"
+                  class="modal-input"
+                  maxlength="80"
+                  required
+                />
+                <input type="hidden" id="reviewRating" name="rating" value="5" />
+                <div class="star-picker" id="starPicker" data-rating="5">
+                  <span>Rating:</span>
+                  <i class="fa-solid fa-star filled" data-val="1"></i>
+                  <i class="fa-solid fa-star filled" data-val="2"></i>
+                  <i class="fa-solid fa-star filled" data-val="3"></i>
+                  <i class="fa-solid fa-star filled" data-val="4"></i>
+                  <i class="fa-solid fa-star filled" data-val="5"></i>
+                </div>
+                <textarea
+                  name="message"
+                  placeholder="Write your review..."
+                  class="modal-textarea"
+                  rows="4"
+                  maxlength="500"
+                  required
+                ></textarea>
+                <button type="submit" class="btn btn-primary full-width">Submit Review</button>
+              </form>
             </div>
           </div>
-        </div>
+        <% } %>
       </div>
     </section>
 

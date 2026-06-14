@@ -301,6 +301,47 @@
         color: var(--text-pure);
       }
 
+      .auth-error {
+        margin-bottom: 1.25rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(194, 155, 104, 0.35);
+        background: rgba(194, 155, 104, 0.08);
+        color: #f8ead3;
+        font-size: 0.9rem;
+      }
+
+      .auth-link-row {
+        margin-top: 1.1rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .auth-link-row a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .google-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+        width: 100%;
+        margin-top: 0.9rem;
+        border: 1px solid var(--border-color);
+        padding: 1rem 1.1rem;
+        color: var(--text-pure);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .google-btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--border-focus);
+      }
+
       /* --- RESPONSIVE ADJUSTMENTS --- */
       @media (max-width: 992px) {
         #custom-cursor {
@@ -335,6 +376,10 @@
           <p>Login</p>
         </div>
 
+        <% if (error) { %>
+        <div class="auth-error"><%= error %></div>
+        <% } %>
+
         <form action="/api/v1/login" method="POST">
           <div class="form-group">
             <label for="email">Corporate Email</label>
@@ -344,6 +389,7 @@
               name="email"
               class="form-control"
               placeholder="name@company.com"
+              value="<%= typeof email !== 'undefined' ? email : '' %>"
               required
             />
             <i class="fa-regular fa-envelope input-icon"></i>
@@ -378,6 +424,14 @@
             Access Dashboard <i class="fa-solid fa-arrow-right-to-bracket"></i>
           </button>
         </form>
+
+        <a href="/api/v1/auth/google" class="google-btn">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </a>
+
+        <div class="auth-link-row">
+          New here? <a href="/api/v1/signup">Create an account</a>
+        </div>
 
         <a href="/" class="return-home">
           <i class="fa-solid fa-arrow-left"></i> Return to Homepage
