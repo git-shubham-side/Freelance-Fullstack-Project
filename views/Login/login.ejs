@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enterprise Login | Contact Me Services</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      /* --- THEME VARIABLES --- */
+      :root {
+        --bg-main: #0b0f17;
+        --bg-surface: #131a26;
+        --text-pure: #ffffff;
+        --text-muted: #94a3b8;
+        --accent: #c29b68;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-focus: rgba(194, 155, 104, 0.5);
+        --sharp: 0px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        border-radius: var(--sharp) !important;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        color: var(--text-pure);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .auth-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+          linear-gradient(rgba(11, 15, 23, 0.9), rgba(11, 15, 23, 0.98)),
+          url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070")
+            center/cover no-repeat;
+        z-index: -2;
+      }
+
+      .glow-orb {
+        position: absolute;
+        width: 50vw;
+        height: 50vw;
+        max-width: 500px;
+        max-height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(194, 155, 104, 0.08) 0%,
+          rgba(0, 0, 0, 0) 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: -1;
+        animation: pulseGlow 6s infinite alternate;
+      }
+      @keyframes pulseGlow {
+        0% {
+          opacity: 0.5;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
+      #custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--accent);
+        position: fixed;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transition:
+          width 0.2s,
+          height 0.2s,
+          background-color 0.2s;
+      }
+
+      /* --- LOGIN ARCHITECTURE --- */
+      .login-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 1.5rem;
+        z-index: 10;
+      }
+
+      .login-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-top: 3px solid var(--accent);
+        padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        width: 100%;
+      }
+
+      .brand-logo {
+        font-size: clamp(1.3rem, 4vw, 1.6rem);
+        color: var(--text-pure);
+        text-decoration: none;
+        font-weight: 700;
+        display: block;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+      .brand-logo span {
+        color: var(--accent);
+      }
+      .login-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+      .login-header p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+        color: var(--text-muted);
+      }
+      .form-control {
+        width: 100%;
+        padding: 1.1rem;
+        padding-left: 3rem;
+        border: 1px solid var(--border-color);
+        background: rgba(11, 15, 23, 0.5);
+        color: var(--text-pure);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: var(--border-focus);
+        background: var(--bg-main);
+        box-shadow: 0 0 15px rgba(194, 155, 104, 0.05);
+      }
+
+      .input-icon {
+        position: absolute;
+        bottom: 1.1rem;
+        left: 1.1rem;
+        color: var(--text-muted);
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+      .form-control:focus + .input-icon,
+      .form-control:focus ~ .input-icon {
+        color: var(--accent);
+      }
+      .password-toggle {
+        position: absolute;
+        bottom: 1.1rem;
+        right: 1.1rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0 0.5rem;
+      }
+      .password-toggle:hover {
+        color: var(--text-pure);
+      }
+
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+      .checkbox-wrapper input[type="checkbox"] {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+      }
+      .checkbox-wrapper input[type="checkbox"]:checked {
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .checkbox-wrapper input[type="checkbox"]:checked::after {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 10px;
+        color: var(--bg-main);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .forgot-link {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .forgot-link:hover {
+        color: var(--text-pure);
+      }
+
+      .btn-premium {
+        position: relative;
+        width: 100%;
+        background: var(--accent);
+        color: var(--bg-main);
+        padding: 1.1rem;
+        border: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        text-transform: uppercase;
+        overflow: hidden;
+        z-index: 1;
+        transition: transform 0.3s ease;
+      }
+      .btn-premium::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--text-pure);
+        transition: left 0.4s ease;
+        z-index: -1;
+      }
+      .btn-premium:hover::before {
+        left: 0;
+      }
+      .btn-premium:hover {
+        color: var(--bg-main);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(194, 155, 104, 0.2);
+      }
+
+      .return-home {
+        display: block;
+        text-align: center;
+        margin-top: 2rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .return-home:hover {
+        color: var(--text-pure);
+      }
+
+      /* --- RESPONSIVE ADJUSTMENTS --- */
+      @media (max-width: 992px) {
+        #custom-cursor {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-options {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .login-card {
+          border-left: none;
+          border-right: none;
+        }
+        .login-container {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-background"></div>
+    <div class="glow-orb"></div>
+    <div id="custom-cursor"></div>
+
+    <main class="login-container">
+      <div class="login-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="login-header">
+          <a href="/" class="brand-logo">Contact Me <span>Services</span></a>
+          <p>Login</p>
+        </div>
+
+        <form action="/api/v1/login" method="POST">
+          <div class="form-group">
+            <label for="email">Corporate Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="name@company.com"
+              required
+            />
+            <i class="fa-regular fa-envelope input-icon"></i>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="••••••••"
+              required
+            />
+            <i class="fa-solid fa-lock input-icon"></i>
+            <i
+              class="fa-regular fa-eye password-toggle"
+              id="togglePassword"
+            ></i>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-wrapper">
+              <input type="checkbox" name="remember" />
+              <span>Remember this device</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-premium">
+            Access Dashboard <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </button>
+        </form>
+
+        <a href="/" class="return-home">
+          <i class="fa-solid fa-arrow-left"></i> Return to Homepage
+        </a>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ once: true, easing: "cubic-bezier(0.25, 1, 0.5, 1)" });
+
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", function () {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+      });
+
+      if (window.innerWidth > 992) {
+        const cursor = document.getElementById("custom-cursor");
+        document.addEventListener("mousemove", (e) => {
+          cursor.style.left = e.clientX + "px";
+          cursor.style.top = e.clientY + "px";
+        });
+        document
+          .querySelectorAll(
+            "a, button, input, .checkbox-wrapper, .password-toggle",
+          )
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+              cursor.style.width = "40px";
+              cursor.style.height = "40px";
+              cursor.style.backgroundColor = "rgba(194, 155, 104, 0.1)";
+            });
+            el.addEventListener("mouseleave", () => {
+              cursor.style.width = "20px";
+              cursor.style.height = "20px";
+              cursor.style.backgroundColor = "transparent";
+            });
+          });
+      }
+    </script>
+  </body>
+</html>

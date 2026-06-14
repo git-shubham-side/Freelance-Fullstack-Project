@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Under Construction | CMS Enterprise</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* --- TECHNICAL THEME VARIABLES --- */
+      :root {
+        --bg-deep: #05070a;
+        --bg-panel: #0d131f;
+        --text-pure: #ffffff;
+        --text-muted: #64748b;
+        --accent: #c29b68;
+        --border-color: rgba(194, 155, 104, 0.15);
+        --grid-color: rgba(255, 255, 255, 0.03);
+        --sharp: 0px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        border-radius: var(--sharp) !important;
+      }
+
+      body {
+        background-color: var(--bg-deep);
+        color: var(--text-pure);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* --- BLUEPRINT GRID BACKGROUND --- */
+      .blueprint-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image:
+          linear-gradient(var(--grid-color) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: -2;
+      }
+
+      .bg-vignette {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(
+          circle at center,
+          transparent 0%,
+          var(--bg-deep) 100%
+        );
+        z-index: -1;
+      }
+
+      /* --- HEADER --- */
+      header {
+        padding: 1.5rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        background: rgba(5, 7, 10, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .brand-logo {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        font-weight: 700;
+        color: var(--text-pure);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-logo span {
+        color: var(--accent);
+      }
+
+      /* --- MAIN LAYOUT --- */
+      main {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 4rem 5%;
+        gap: 4rem;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* --- LEFT CONTENT --- */
+      .content-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(194, 155, 104, 0.1);
+        border: 1px solid var(--accent);
+        padding: 0.5rem 1rem;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        width: max-content;
+        margin-bottom: 1.5rem;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent);
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(194, 155, 104, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(194, 155, 104, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(194, 155, 104, 0);
+        }
+      }
+
+      .main-title {
+        font-size: clamp(2.5rem, 6vw, 5.5rem);
+        line-height: 1.1;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+      }
+
+      .main-title .outline-text {
+        -webkit-text-stroke: 1px var(--text-pure);
+        color: transparent;
+      }
+
+      .description {
+        color: var(--text-muted);
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        max-width: 500px;
+        margin-bottom: 3rem;
+        line-height: 1.7;
+      }
+
+      /* --- PROGRESS BAR --- */
+      .progress-container {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 3rem;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-pure);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .progress-track {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--accent);
+        width: 68%;
+        box-shadow: 0 0 15px var(--accent);
+        animation: loadProgress 2s ease-out;
+      }
+
+      @keyframes loadProgress {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 68%;
+        }
+      }
+
+      /* --- BUTTONS --- */
+      .action-group {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        padding: 1rem 2rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--text-pure);
+        color: var(--bg-deep);
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent);
+        color: var(--text-pure);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-ghost:hover {
+        color: var(--text-pure);
+        border-color: var(--text-pure);
+      }
+
+      /* --- RIGHT CONTENT: TERMINAL --- */
+      .terminal-window {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        width: 100%;
+        height: 450px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .terminal-header {
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.8rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .terminal-btn {
+        width: 12px;
+        height: 12px;
+        background: var(--border-color);
+        flex-shrink: 0;
+      }
+
+      .terminal-title {
+        margin-left: 1rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .terminal-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        color: #4ade80; /* Matrix Green */
+        line-height: 1.8;
+      }
+
+      .terminal-line {
+        display: flex;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeInLine 0.1s forwards;
+        word-break: break-word; /* Prevents overflow on mobile */
+      }
+
+      .line-time {
+        color: var(--text-muted);
+        flex-shrink: 0;
+      }
+      .line-text {
+        color: var(--text-pure);
+      }
+      .line-status {
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .cursor-blink {
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        background: var(--accent);
+        vertical-align: middle;
+        animation: blinkCursor 1s step-end infinite;
+        margin-left: 5px;
+      }
+
+      @keyframes fadeInLine {
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes blinkCursor {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* --- FULL RESPONSIVE MEDIA QUERIES --- */
+      @media (max-width: 992px) {
+        main {
+          grid-template-columns: 1fr;
+          padding: 3rem 5%;
+          gap: 3rem;
+        }
+
+        .terminal-window {
+          height: 380px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 3rem;
+        }
+        .main-title .outline-text {
+          -webkit-text-stroke: 1px var(--text-pure); /* Maintains thin stroke on smaller text */
+        }
+      }
+
+      @media (max-width: 576px) {
+        header {
+          padding: 1rem 5%;
+        }
+
+        .header-btn {
+          padding: 0.4rem 0.8rem !important;
+          font-size: 0.75rem !important;
+        }
+
+        main {
+          padding: 2rem 5%;
+          gap: 2.5rem;
+        }
+
+        .main-title {
+          font-size: 2.5rem;
+        }
+
+        .description {
+          font-size: 0.9rem;
+          margin-bottom: 2rem;
+        }
+
+        .progress-container {
+          margin-bottom: 2rem;
+        }
+
+        .action-group {
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+          width: 100%;
+        }
+
+        .terminal-window {
+          height: 320px;
+        }
+
+        .terminal-header {
+          padding: 0.6rem 1rem;
+        }
+
+        .terminal-body {
+          padding: 1rem;
+          font-size: 0.75rem;
+        }
+
+        .terminal-line {
+          gap: 0.5rem;
+          flex-wrap: wrap; /* Allows text to wrap nicely on very narrow screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Backgrounds -->
+    <div class="blueprint-bg"></div>
+    <div class="bg-vignette"></div>
+
+    <!-- Header -->
+    <header>
+      <a href="/" class="brand-logo">
+        <i class="fa-solid fa-layer-group" style="color: var(--accent)"></i>
+        CMS <span>Portal</span>
+      </a>
+      <a
+        href="mailto:support@contactmeservices.com"
+        class="btn-ghost header-btn"
+        style="padding: 0.5rem 1rem; font-size: 0.8rem"
+      >
+        Contact Support
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Left Side Text & Actions -->
+      <div class="content-left">
+        <div class="status-badge">
+          <div class="pulse-dot"></div>
+          System Upgrade
+        </div>
+
+        <h1 class="main-title">
+          <span class="outline-text">Under</span><br />
+          Construction
+        </h1>
+
+        <p class="description">
+          We are deploying major infrastructure upgrades to the CMS Enterprise
+          Portal. Core modules are being rebuilt for better performance,
+          security, and scalability.
+        </p>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+          <div class="progress-header">
+            <span>Deployment Progress</span>
+            <span style="color: var(--accent)">68%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="action-group">
+          <button
+            class="btn-primary"
+            onclick="alert('Notification alert setup successful!')"
+          >
+            <i class="fa-solid fa-bell"></i> Notify Me
+          </button>
+          <a href="/" class="btn-ghost">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Terminal -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-btn"></div>
+          <div class="terminal-btn"></div>
+          <div class="terminal-btn"></div>
+          <span class="terminal-title">bash -- cms-deploy-script.sh</span>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+          <!-- JS will inject logs here -->
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Fake Terminal Typing Effect
+      const terminalBody = document.getElementById("terminal-body");
+
+      const logs = [
+        {
+          time: "00:00:01",
+          text: "Initializing deployment sequence...",
+          status: "[OK]",
+        },
+        {
+          time: "00:00:04",
+          text: "Compiling core UI components...",
+          status: "[OK]",
+        },
+        {
+          time: "00:00:12",
+          text: "Establishing secure database tunnel...",
+          status: "[OK]",
+        },
+        {
+          time: "00:00:28",
+          text: "Migrating legacy schema data...",
+          status: "[OK]",
+        },
+        {
+          time: "00:00:45",
+          text: "Loading 'Dehydrated Powder' modules...",
+          status: "[OK]",
+        },
+        {
+          time: "00:01:02",
+          text: "Loading 'Hostel Management' modules...",
+          status: "[OK]",
+        },
+        {
+          time: "00:01:15",
+          text: "Optimizing E-Tender service endpoints...",
+          status: "[PENDING]",
+        },
+        {
+          time: "00:01:18",
+          text: "Building enterprise dashboards",
+          status: "",
+        }, // Last line gets the cursor
+      ];
+
+      let currentLog = 0;
+
+      function renderTerminalLine(log, isLast) {
+        const line = document.createElement("div");
+        line.className = "terminal-line";
+
+        let innerHTML = `
+          <span class="line-time">[${log.time}]</span>
+          <span class="line-text">${log.text}</span>
+        `;
+
+        if (log.status) {
+          innerHTML += `<span class="line-status">${log.status}</span>`;
+        }
+
+        if (isLast) {
+          innerHTML += `<span class="cursor-blink"></span>`;
+        }
+
+        line.innerHTML = innerHTML;
+        return line;
+      }
+
+      function typeLogs() {
+        if (currentLog < logs.length) {
+          // Remove cursor from previous line if exists
+          const existingCursor = document.querySelector(".cursor-blink");
+          if (existingCursor) existingCursor.remove();
+
+          const isLast = currentLog === logs.length - 1;
+          const lineElement = renderTerminalLine(logs[currentLog], isLast);
+
+          terminalBody.appendChild(lineElement);
+
+          // Auto scroll to bottom
+          terminalBody.scrollTop = terminalBody.scrollHeight;
+
+          currentLog++;
+
+          // Random delay for realistic typing feel (between 500ms and 1500ms)
+          const delay = Math.floor(Math.random() * 1000) + 500;
+          setTimeout(typeLogs, delay);
+        } else {
+          // Keep appending dots to the last line to show "loading"
+          setInterval(() => {
+            const lastLineText = terminalBody.querySelector(
+              ".terminal-line:last-child .line-text",
+            );
+            if (lastLineText.innerText.endsWith("...")) {
+              lastLineText.innerText = lastLineText.innerText.replace(
+                "...",
+                "",
+              );
+            } else {
+              lastLineText.innerText += ".";
+            }
+          }, 800);
+        }
+      }
+
+      // Start the terminal animation slightly after page load
+      setTimeout(typeLogs, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Deendayal Boys Hostel – Premium student accommodation with high-speed WiFi, RO water, attached bathrooms, and a vibrant community. Located in the heart of the city."
+    />
+    <meta
+      name="keywords"
+      content="boys hostel, student hostel, Deendayal hostel, hostel nanded, student accommodation, boys hostel near me, ddbh, boys hostel near me, boys hostel nanded"
+    />
+    <meta name="author" content="Deendayal Boys Hostel" />
+    <title>Deendayal Boys Hostel</title>
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/Hostel_CSS/hostel.css" />
+  </head>
+  <body>
+    <!-- ========== PRELOADER ========== -->
+    <div id="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-ring"></div>
+        <span>DDBH</span>
+      </div>
+    </div>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <!-- Logo + Name -->
+        <a href="#home" class="nav-brand">
+          <div class="nav-logo-wrap">
+            <img
+              src="/Hostel_Images/logo.JPG"
+              alt="Deendayal Boys Hostel Logo"
+              class="nav-logo"
+              id="navLogo"
+            />
+          </div>
+          <div class="nav-title-wrap">
+            <span class="nav-name">Deendayal Boys Hostel</span>
+            <span class="nav-tagline-small">Est. 2024</span>
+          </div>
+        </a>
+
+        <!-- Nav Links -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#reviews" class="nav-link">Reviews</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="home" class="hero">
+      <!--
+      ============================================================
+      DESKTOP SLIDESHOW BACKGROUNDS (landscape/wide images)
+      Add or remove images by editing data-slides.
+      Separate each image path with a pipe  |
+      Recommended size: 1920x1080px (landscape)
+      ============================================================
+    -->
+      <div
+        class="hero-bg desktop-bg"
+        id="heroBgDesktop"
+        data-slides="/Hostel_Images/IMG 2.jpeg|/Hostel_Images/1.jpeg|/Hostel_Images/3.jpeg|/Hostel_Images/secondfloor.jpg|/Hostel_Images/thirdfloor.jpg|/Hostel_Images/2.jpeg"
+      ></div>
+
+      <!--
+      ============================================================
+      MOBILE BACKGROUND (portrait image — shown only on phones)
+      Replace "images/hero-mobile.jpg" with your portrait photo.
+      Recommended size: 768x1200px or any tall portrait image.
+      You can also add more mobile images separated by |
+      ============================================================
+    -->
+      <div
+        class="hero-bg mobile-bg"
+        id="heroBgMobile"
+        data-slides="/Hostel_Images/img 2.jpeg"
+      ></div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal-up">
+          Welcome to a New Standard of Living
+        </p>
+        <h1 class="hero-title reveal-up delay-1">
+          Deendayal<br />
+          <em>Boys Hostel</em>
+        </h1>
+        <p class="hero-tagline reveal-up delay-2">
+          Comfort, Convenience &amp; Community
+        </p>
+        <div class="hero-actions reveal-up delay-3">
+          <a
+            href="https://wa.me/919405365015?text=Hello%2C%20I%20am%20interested%20in%20booking%20a%20room%20at%20Deendayal%20Boys%20Hostel."
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >
+            <i class="fa-brands fa-whatsapp"></i> Book Now
+          </a>
+          <a href="#features" class="btn btn-outline">Explore Amenities</a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero-scroll-hint reveal-up delay-4">
+          <span>Scroll to Explore</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="hero-stats reveal-up delay-4">
+        <div class="stat-item">
+          <strong>200+</strong>
+          <span>Happy Students</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>3+</strong>
+          <span>Years of Trust</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>24/7</strong>
+          <span>Security</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <strong>4.7★</strong>
+          <span>Average Rating</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURES SECTION ========== -->
+    <section id="features" class="features section-pad">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">What We Offer</span>
+          <h2 class="section-title">Premium <em>Amenities</em></h2>
+          <p class="section-desc">
+            Every detail is crafted to make your stay comfortable, productive,
+            and enjoyable.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card reveal-up">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-wifi"></i>
+            </div>
+            <h3>High Speed WiFi</h3>
+            <p>
+              Blazing-fast fibre internet throughout the hostel — stream, study,
+              and stay connected 24/7 without interruption.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-1">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-shower"></i>
+            </div>
+            <h3>Attached Bathrooms</h3>
+            <p>
+              Every room comes with a clean, tiled attached bathroom — your
+              private space, your convenience, your schedule.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-2">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-droplet"></i>
+            </div>
+            <h3>RO Purified Water</h3>
+            <p>
+              Safe, mineral-balanced drinking water available round the clock.
+              Health is non-negotiable here.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-3">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-shirt"></i>
+            </div>
+            <h3>Washing Machine</h3>
+            <p>
+              In-house laundry facility so fresh clothes are always within reach
+              — no more laundry runs outside.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-broom"></i>
+            </div>
+            <h3>Cleaning Service</h3>
+            <p>
+              Daily room and common area cleaning by dedicated staff. Come home
+              to a spotless environment every single day.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-1">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <h3>Prime Location</h3>
+            <p>
+              Strategically situated near colleges, markets, and transport hubs
+              — everything you need is minutes away.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-2">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>24/7 Security</h3>
+            <p>
+              CCTV surveillance and trained security personnel ensure a safe,
+              secure environment around the clock.
+            </p>
+          </div>
+
+          <div class="feature-card reveal-up delay-3">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Power Backup</h3>
+            <p>
+              Uninterrupted power supply with generator backup — so your study
+              sessions and work never face blackouts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GALLERY SECTION ========== -->
+    <section id="gallery" class="gallery section-pad">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">A Glimpse Inside</span>
+          <h2 class="section-title">Life at <em>Deendayal</em></h2>
+          <p class="section-desc">
+            Clean spaces, welcoming rooms, and a vibrant community — see it for
+            yourself.
+          </p>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <div
+            class="gallery-item reveal-up"
+            data-caption="Spacious Private Room"
+          >
+            <img
+              src="/Hostel_Images/1.jpeg"
+              alt="Private Room"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Private Room</span>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item reveal-up delay-1"
+            data-caption="Modern Common Area"
+          >
+            <img src="images/3.jpeg" alt="Common Area" loading="lazy" />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Common Area</span>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item reveal-up delay-2"
+            data-caption="Well-lit Study Room"
+          >
+            <img
+              src="/Hostel_Images/secondfloor.jpg"
+              alt="Study Room"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Second Floor</span>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item reveal-up delay-3"
+            data-caption="Clean Attached Bathroom"
+          >
+            <img
+              src="/Hostel_Images/thirdfloor.jpg"
+              alt="Bathroom"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Third Floor</span>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item reveal-up"
+            data-caption="Rooftop Terrace View"
+          >
+            <img src="/Hostel_Images/IMG 2.jpeg" alt="Terrace" loading="lazy" />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Students</span>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item reveal-up delay-1"
+            data-caption="Vibrant Dining Space"
+          >
+            <img
+              src="/Hostel_Images/poster.jpg"
+              alt="Dining Area"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+              <span>Poster</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lightbox -->
+      <div
+        id="lightbox"
+        class="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Image Preview"
+      >
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-next" id="lightboxNext" aria-label="Next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-content">
+          <img id="lightboxImg" src="" alt="" />
+          <p id="lightboxCaption"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section id="about" class="about section-pad">
+      <div class="container about-grid">
+        <div class="about-visual reveal-left">
+          <div class="about-img-frame">
+            <img
+              src="/Hostel_Images/2.jpeg"
+              alt="Deendayal Boys Hostel Building"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-badge">
+            <strong>3+</strong>
+            <span>Years of Excellence</span>
+          </div>
+        </div>
+
+        <div class="about-content reveal-right">
+          <span class="section-tag">Our Story</span>
+          <h2 class="section-title">
+            More Than a Hostel,<br /><em>A Home Away from Home</em>
+          </h2>
+          <p>
+            Founded with a simple belief — that every student deserves a
+            dignified, comfortable, and inspiring place to live — Deendayal Boys
+            Hostel has been a trusted name in student accommodation for over 15
+            years.
+          </p>
+          <p>
+            We combine the warmth of a family environment with the convenience
+            of modern facilities. From well-furnished rooms to a supportive
+            community, every element is designed to help you focus on what truly
+            matters: your growth.
+          </p>
+          <ul class="about-highlights">
+            <li>
+              <i class="fa-solid fa-circle-check"></i> Well-furnished,
+              well-maintained rooms
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> Strict discipline with a
+              friendly atmosphere
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> Transparent management
+              with no hidden charges
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check"></i> Diverse community of
+              students from across India
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary mt-1">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== REVIEWS SECTION ========== -->
+    <section id="reviews" class="reviews section-pad">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-tag">Student Voices</span>
+          <h2 class="section-title">What Residents <em>Say</em></h2>
+          <p class="section-desc">
+            Real experiences from the students who call Deendayal their home.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card reveal-up">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-text">
+              "Best decision I ever made. The rooms are clean, WiFi is lightning
+              fast, and the staff is incredibly supportive. Felt at home from
+              day one. Highly recommended for any student."
+            </p>
+            <div class="review-author">
+              <div class="review-avatar" data-initials="MW"></div>
+              <div>
+                <strong>Maitrey Wathore</strong>
+                <span>NEET Aspirant</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card reveal-up delay-1">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-text">
+              "The attached bathroom alone is worth it. No more rush in the
+              mornings. The RO water is a lifesaver. The location is perfect —
+              college is just 10 minutes away. Truly premium living."
+            </p>
+            <div class="review-author">
+              <div class="review-avatar" data-initials="SJ"></div>
+              <div>
+                <strong>Shivam Jadhav</strong>
+                <span>MCA 2nd Year</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card reveal-up delay-2">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star-half-stroke"></i>
+            </div>
+            <p class="review-text">
+              "I've stayed in 3 different hostels. This is by far the best. The
+              management is transparent, the environment is positive, and the
+              cleaning service keeps everything spotless. No complaints at all."
+            </p>
+            <div class="review-author">
+              <div class="review-avatar" data-initials="AM"></div>
+              <div>
+                <strong>Abhay Maske</strong>
+                <span>JEE Aspirant</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Review Button (UI only) -->
+        <div class="reviews-action reveal-up">
+          <button class="btn btn-outline" id="addReviewBtn">
+            <i class="fa-solid fa-pen-to-square"></i> Add Your Review
+          </button>
+        </div>
+
+        <!-- Review Modal (UI only) -->
+        <div
+          id="reviewModal"
+          class="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Add Review"
+        >
+          <div class="modal-box">
+            <button class="modal-close" id="modalClose" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3>Share Your Experience</h3>
+            <p>Your review helps future students make an informed decision.</p>
+            <div class="modal-form">
+              <input type="text" placeholder="Your Name" class="modal-input" />
+              <input
+                type="text"
+                placeholder="Course & Year"
+                class="modal-input"
+              />
+              <div class="star-picker" id="starPicker">
+                <span>Rating:</span>
+                <i class="fa-regular fa-star" data-val="1"></i>
+                <i class="fa-regular fa-star" data-val="2"></i>
+                <i class="fa-regular fa-star" data-val="3"></i>
+                <i class="fa-regular fa-star" data-val="4"></i>
+                <i class="fa-regular fa-star" data-val="5"></i>
+              </div>
+              <textarea
+                placeholder="Write your review..."
+                class="modal-textarea"
+                rows="4"
+              ></textarea>
+              <button class="btn btn-primary full-width">Submit Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CALL TO ACTION SECTION ========== -->
+    <section id="contact" class="cta section-pad">
+      <div class="cta-bg"></div>
+      <div class="container cta-content reveal-up">
+        <span class="section-tag light">Ready to Join?</span>
+        <h2 class="cta-title">
+          Your Perfect Room<br /><em>Is Waiting for You</em>
+        </h2>
+        <p class="cta-desc">
+          Reach out to us now on WhatsApp and secure your spot at Deendayal Boys
+          Hostel. Limited rooms available.
+        </p>
+        <div class="cta-actions">
+          <a
+            href="https://wa.me/919405365015?text=Hello%2C%20I%20want%20to%20inquire%20about%20room%20availability%20at%20Deendayal%20Boys%20Hostel."
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary btn-large"
+          >
+            <i class="fa-brands fa-whatsapp"></i> Contact on WhatsApp
+          </a>
+          <a href="tel:+919405365015" class="btn btn-outline-light btn-large">
+            <i class="fa-solid fa-phone"></i> Call Now
+          </a>
+        </div>
+        <div class="cta-trust">
+          <span
+            ><i class="fa-solid fa-circle-check"></i> No hidden charges</span
+          >
+          <span><i class="fa-solid fa-circle-check"></i> Instant response</span>
+          <span
+            ><i class="fa-solid fa-circle-check"></i> Site visits welcome</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="/Hostel_Images/logo.JPG" alt="Logo" class="footer-logo" />
+            <span class="footer-name">Deendayal Boys Hostel</span>
+          </div>
+          <p>
+            A trusted home for students seeking comfort, community, and
+            convenience in the heart of the city.
+          </p>
+          <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"
+              ><i class="fa-brands fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Amenities</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span
+                >Mahalakshmi Complex, Bhagya Nagar T-Point,<br />Nanded,
+                Maharashtra – 431606</span
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:+919405365015">+91 94053 65015</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <a
+                href="https://wa.me/919405365015"
+                target="_blank"
+                rel="noopener"
+                >Chat on WhatsApp</a
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:deendayalboyshostel@gmail.com"
+                >deendayalboyshostel@gmail.com</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; <span id="currentYear"></span> Deendayal Boys Hostel. All
+          Rights Reserved.
+        </p>
+        <!-- <p class="footer-credit">Designed and Maintained by Ashutosh Jain</p> -->
+      </div>
+    </footer>
+
+    <!-- ========== SCROLL TO TOP ========== -->
+    <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Main Script -->
+    <script src="/Hostel_JS/script.js"></script>
+  </body>
+</html>
